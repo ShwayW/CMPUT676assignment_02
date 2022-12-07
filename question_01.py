@@ -38,15 +38,16 @@ def threshold(p_min, p_max, y):
 def threshold_based_alg(p_min, p_max, input_seq):
 	y = 0
 	decision_seq = []
-	for t in range(0, len(input_seq), 2):
-		v = input_seq[t]
-		w = input_seq[t + 1]
+	for tI in range(0, len(input_seq), 2):
+		v = input_seq[tI]
+		w = input_seq[tI + 1]
 		p = threshold(p_min, p_max, y)
 		if (v/w < p):
 			x = 0
 		elif (v/w >= p):
 			x = 1
 		y += w * x
+		y = min(1, y)
 		decision_seq.append(x)
 	return decision_seq
 
@@ -59,15 +60,13 @@ if (__name__ == "__main__"):
 	p_max = 2
 	
 	# the epsilon value
-	epsilon = 0.001
+	epsilon = 0.005
 	
 	# number of iterations
-	n = 100
+	n = 1000
 	
 	# initialize the input sequence
 	input_seq = init_input_seq(p_min, p_max, epsilon, n)
-	
-	print(input_seq)
 	
 	# compute the answer by the threshold-based algorithm
 	ans = threshold_based_alg(p_min, p_max, input_seq)
