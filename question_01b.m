@@ -4,7 +4,7 @@
 
 %% Preliminaries
 % the total weight
-total_weight = 1;
+total_weight = 1000;
 
 % lower bound
 p_min = 10;
@@ -13,7 +13,7 @@ p_min = 10;
 p_max = 20;
 
 % epsilon, weight's upper bound
-epsilon = 0.01;
+epsilon = 3;
 
 % number of items
 n = 1000;
@@ -22,7 +22,7 @@ n = 1000;
 numRounds = 100;
 
 % the verbose
-verbose = false;
+verbose = true;
 
 % the best CR
 bestCR = 1 + log(p_max / p_min);
@@ -141,7 +141,8 @@ beta = 1 / (1 + log(p_max/p_min));
 if (y >= 0 && y < beta)
     th = p_min;
 elseif (y >= beta && y <= total_weight)
-    th = p_min * exp(y / beta - 1);
+    %th = p_min * exp(y / beta - 1);
+    th = p_min;
 end
 end
 
